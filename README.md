@@ -1,13 +1,13 @@
 # Core Electronics Unified PiicoDev Library
-*Unifies the I2C drivers for different implementations of MicroPython*
+Unified device libraries for the PiicoDev ecosystem of sensors and modules.
+Built for MicroPython and Python.
 
 ## Installation
 On Raspberry pi, run the following to install:
 ```python
-pip install CE-PiicoDev-Unified
+pip install piicodev
 ```
 
-## Usage
 
 ## Developing
 To install this package, along with the tools you need to develop and run tests, run the following (in your virtualenv:)

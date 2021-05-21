@@ -4,15 +4,21 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setup(
-    name='PiicoDev',
-    version='0.0.0',
+    name='piicodev',
+    version='0.0.2',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/CoreElectronics/PiicoDev",
     author="Michael Ruppe",
     author_email="production.inbox@coreelectronics.com.au",
-    py_modules=["PiicoDev_Unified"],
+    py_modules=[
+        "PiicoDev_Unified",
+        "PiicoDev_MPU6050",
+        "PiicoDev_TMP117",
+        "PiicoDev_VEML6030",
+        "PiicoDev_VL53L1X",
+    ],
     package_dir={'': 'src'},
     classifiers=[
         "Programming Language :: Python :: 3",
