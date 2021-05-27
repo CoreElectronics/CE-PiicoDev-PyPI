@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='piicodev',
-    version='0.0.2',
+    version='0.0.3',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -18,6 +18,7 @@ setup(
         "PiicoDev_TMP117",
         "PiicoDev_VEML6030",
         "PiicoDev_VL53L1X",
+        "PiicoDev_BME280",
     ],
     package_dir={'': 'src'},
     classifiers=[
