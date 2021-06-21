@@ -10,7 +10,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/CoreElectronics/PiicoDev",
-    author="Michael Ruppe",
+    author="Core Electronics",
     author_email="production.inbox@coreelectronics.com.au",
     py_modules=[
         "PiicoDev_Unified",
