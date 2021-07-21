@@ -1,12 +1,5 @@
-# A simple class to read data from the VEML i2c light sensor
-
-# This module has been tested with the following development boards:
-#    • BBC Micro:bit
-#    • Raspberry Pi Pico (RP2040)
-
-# No warranties express or implied, including any warranty of merchantability and warranty of fitness for a particular purpose.
+# PiicoDev VEML6030 Ambient Light Sensor piico.dev/p3
 # Written by Michael Ruppe at Core Electronics MAR 2021
-# Updated to work with unified PiicoDev i2c module.
 
 from PiicoDev_Unified import *
 i2c = PiicoDev_Unified_I2C()

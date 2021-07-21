@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='piicodev',
-    version='0.0.3',
+    version='0.0.4',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -27,6 +27,9 @@ setup(
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: Implementation :: MicroPython",
         "License :: OSI Approved :: MIT License",
+    ],
+    install_requires = [
+        "smbus2>=0.4.1"
     ],
     extras_require = {
         "dev": [

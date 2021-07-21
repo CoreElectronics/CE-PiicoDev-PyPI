@@ -3,9 +3,9 @@ Unified device libraries for the PiicoDev ecosystem of sensors and modules.
 Built for MicroPython and Python.
 
 ## Installation
-On Raspberry pi, run the following to install:
+On Raspberry Pi, run the following to install:
 ```python
-pip install piicodev
+pip3 install piicodev
 ```
 
 
