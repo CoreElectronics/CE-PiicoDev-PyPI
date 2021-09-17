@@ -5,11 +5,11 @@ with open("README.md", "r") as fh:
 
 setup(
     name='piicodev',
-    version='0.0.5',
+    version='0.0.6',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/CoreElectronics/PiicoDev",
+    url="https://github.com/CoreElectronics/CE-PiicoDev-PyPI",
     author="Core Electronics",
     author_email="production.inbox@coreelectronics.com.au",
     py_modules=[
