@@ -5,7 +5,7 @@
 from PiicoDev_Unified import *
 
 # Register definitions
-REG_TEMPC = b'\x00'
+REG_TEMPC = 0x00
 compat_str = '\nUnified PiicoDev library out of date.  Get the latest module: https://piico.dev/unified \n'
 
 class PiicoDev_TMP117(object):    
@@ -22,7 +22,7 @@ class PiicoDev_TMP117(object):
 
     def readTempC(self):
         try:
-            data = self.i2c.read16(self.addr, REG_TEMPC)
+            data = self.i2c.readfrom_mem(self.addr, REG_TEMPC, 2)
         except:
             print(i2c_err_str.format(self.addr))
             return float('NaN')
@@ -39,4 +39,3 @@ class PiicoDev_TMP117(object):
         
     def readTempK(self):
         return self.readTempC() + 273.15
-
