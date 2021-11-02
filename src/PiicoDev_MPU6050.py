@@ -3,7 +3,7 @@
 # Original repo https://github.com/nickcoutsos/MPU-6050-Python
 
 from PiicoDev_Unified import *
-from math import sqrt
+from math import sqrt, atan2
 
 compat_str = '\nUnified PiicoDev library out of date.  Get the latest module: https://piico.dev/unified \n'
 
@@ -220,3 +220,9 @@ class PiicoDev_MPU6050(object):
         z = gyro_data['z'] / scaler
 
         return {'x': x, 'y': y, 'z': z}
+
+    def read_angle(self): # returns radians. orientation matches silkscreen
+        a=self.read_accel_data()
+        x=atan2(a['y'],a['z'])
+        y=atan2(-a['x'],a['z'])
+        return {'x': x, 'y': y}
