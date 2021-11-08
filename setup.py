@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='piicodev',
-    version='0.0.20',
+    version='0.0.23',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -27,6 +27,7 @@ setup(
         "PiicoDev_VEML6040",
         "PiicoDev_CAP1203",
         "PiicoDev_SSD1306",
+        "PiicoDev_RGB",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
