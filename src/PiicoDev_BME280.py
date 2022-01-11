@@ -25,7 +25,11 @@ class PiicoDev_BME280:
         self.addr = address
 
         self._t_fine = 0
-        self._T1 = self._read16(0x88)
+        try:
+            self._T1 = self._read16(0x88)
+        except Exception as e:
+            print(i2c_err_str.format(self.addr))
+            raise e
         self._T2 = self._short(self._read16(0x8A))
         self._T3 = self._short(self._read16(0x8C))
         self._P1 = self._read16(0x8E)
@@ -51,7 +55,7 @@ class PiicoDev_BME280:
         self._write8(0xF4, 0x24)
         sleep_ms(2)
         self._write8(0xF5, self.iir<<2)
-
+        
     def _read8(self, reg):
         t = self.i2c.readfrom_mem(self.addr, reg, 1)
         return t[0]
