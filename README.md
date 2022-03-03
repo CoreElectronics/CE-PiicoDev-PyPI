@@ -11,9 +11,9 @@ sudo pip3 install piicodev
 
 ## Changes
 
+	- v1.1.3 - Add support for QMC6310
 	- v1.1.2 - No change - deployment test
 	- v1.1.1 
-		- Add support for QMC6310
 		- SSD1306: Add support for circles & arcs
 	- v1.0.1 
 		- BME280: Add initialisation error handling

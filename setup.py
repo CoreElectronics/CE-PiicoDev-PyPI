@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='piicodev',
-    version='1.1.2',
+    version='1.1.3',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",

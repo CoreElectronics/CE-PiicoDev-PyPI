@@ -116,7 +116,7 @@ class PiicoDev_QMC6310(object):
         self._dataValid = False
         NaN = {'x':float('NaN'),'y':float('NaN'),'z':float('NaN')}
         try:
-            status = int.from_bytes(self.i2c.readfrom_mem(self.addr, _ADDRESS_STATUS, 1), '')
+            status = int.from_bytes(self.i2c.readfrom_mem(self.addr, _ADDRESS_STATUS, 1), 'big')
         except:
             print(i2c_err_str.format(self.addr))
             self.sample = NaN
