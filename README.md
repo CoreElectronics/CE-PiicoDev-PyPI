@@ -11,6 +11,7 @@ sudo pip3 install piicodev
 
 ## Changes
 
+	- v1.1.4 - Repackage into subfolder deployment
 	- v1.1.3 - Add support for QMC6310
 	- v1.1.2 - No change - deployment test
 	- v1.1.1 
