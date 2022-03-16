@@ -72,6 +72,7 @@ class PiicoDev_QMC6310(object):
         self.data = {}
         self._dataValid = False
         self.loadCalibration()
+        sleep_ms(5)
     
     def _setMode(self, mode):
         self._CR1 = _writeCrumb(self._CR1, _BIT_MODE, mode)
@@ -231,6 +232,7 @@ class PiicoDev_QMC6310(object):
             self.y_offset = float(f.readline())
             f.readline()
             self.z_offset = float(f.readline())
+            sleep_ms(5)
         except:
             print("No calibration file found. Run 'calibrate()' for best results.  Visit https://piico.dev/p15 for more info.")
             sleep_ms(1000)
