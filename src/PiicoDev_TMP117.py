@@ -6,10 +6,17 @@ from PiicoDev_Unified import *
 
 # Register definitions
 REG_TEMPC = 0x00
+_baseAddr = 0x48
 compat_str = '\nUnified PiicoDev library out of date.  Get the latest module: https://piico.dev/unified \n'
 
 class PiicoDev_TMP117(object):    
-    def __init__(self, bus=None, freq=None, sda=None, scl=None, addr = 0x48):
+    def __init__(self, bus=None, freq=None, sda=None, scl=None, address = _baseAddr, asw=None):
+        if type(asw) is list: # preference using the ID argument
+            assert max(asw) <= 1 and min(asw) >= 0 and len(asw) is 4, "asw must be a list of 1/0, length=4"
+            self.addr= _baseAddr + 1*asw[1] + 2*asw[2] + 3*asw[3] # switch [0] doesn't actually change the address. TMP117 appears to default to 0x48 if the addr pin is floating.
+            print(self.addr)
+        else:
+            self.addr = address # accept an integer
         try:
             if compat_ind >= 1:
                 pass
@@ -18,7 +25,6 @@ class PiicoDev_TMP117(object):
         except:
             print(compat_str)
         self.i2c = create_unified_i2c(bus=bus, freq=freq, sda=sda, scl=scl)
-        self.addr = addr
 
     def readTempC(self):
         try:

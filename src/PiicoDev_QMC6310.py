@@ -1,6 +1,9 @@
 # Class and methods for the QMC6310 3-axis magnetometer.
 # Written by Peter Johnston and Michael Ruppe at Core Electronics
 
+# 2022 MAR 17 - Initial release
+# 2022 APR 27 - Add initialisation parameters 'sign_z', 'sign_y', 'sign_z'.  Changed default sign to match silk screen. Updated the readPolar method to match the inversion of the Y axis.
+
 import math
 from PiicoDev_Unified import *
 
@@ -14,6 +17,7 @@ _ADDRESS_ZOUT = 0x05
 _ADDRESS_STATUS = 0x09
 _ADDRESS_CONTROL1 = 0x0A
 _ADDRESS_CONTROL2 = 0x0B
+_ADDRESS_SIGN = 0x29
 _BIT_MODE = 0
 _BIT_ODR = 2
 _BIT_OSR1 = 4
@@ -42,7 +46,7 @@ def _writeCrumb(x, n, c):
 class PiicoDev_QMC6310(object):
     range_gauss = {3000:1e-3, 1200:4e-4, 800:2.6666667e-4, 200:6.6666667e-5} # Maps the range (key) to sensitivity (lsb/gauss)
     range_microtesla = {3000:1e-1, 1200:4e-2, 800:2.6666667e-2, 200:6.6666667e-3} # Maps the range (key) to sensitivity (lsb/microtesla)
-    def __init__(self, bus=None, freq=None, sda=None, scl=None, addr=_I2C_ADDRESS, odr=3, osr1=0, osr2=3, range=3000, calibrationFile='calibration.cal'):
+    def __init__(self, bus=None, freq=None, sda=None, scl=None, addr=_I2C_ADDRESS, odr=3, osr1=0, osr2=3, range=3000, sign_x=0, sign_y=1, sign_z=1, calibrationFile='calibration.cal', suppress_warnings=False):
         try:
             if compat_ind >= 1:
                 pass
@@ -54,14 +58,17 @@ class PiicoDev_QMC6310(object):
         self.addr = addr
         self.odr = odr
         self.calibrationFile = calibrationFile
+        self.suppress_warnings = suppress_warnings
         self._CR1 = 0x00
         self._CR2 = 0x00
+        sign = sign_x + sign_y*2 + sign_z*4
         try:
             self._setMode(1)
             self.setOutputDataRate(odr)
             self.setOverSamplingRatio(osr1)
             self.setOverSamplingRate(osr2)
             self.setRange(range)
+            self._setSign(sign)
         except Exception as e:
             print(i2c_err_str.format(self.addr))
             raise e
@@ -71,7 +78,8 @@ class PiicoDev_QMC6310(object):
         self.declination = 0
         self.data = {}
         self._dataValid = False
-        self.loadCalibration()
+        if calibrationFile is not None:
+            self.loadCalibration()
         sleep_ms(5)
     
     def _setMode(self, mode):
@@ -96,6 +104,9 @@ class PiicoDev_QMC6310(object):
         self.sensitivity=self.range_microtesla[range]
         self._CR2 = _writeCrumb(self._CR2, _BIT_RANGE, r[range])
         self.i2c.writeto_mem(self.addr, _ADDRESS_CONTROL2, bytes([self._CR2]))
+
+    def _setSign(self, sign):
+        self.i2c.writeto_mem(self.addr, _ADDRESS_SIGN, bytes([sign]))
 
     def _convertAngleToPositive(self, angle):
         if angle >= 360.0:
@@ -160,7 +171,7 @@ class PiicoDev_QMC6310(object):
     
     def readPolar(self):
         cartesian = self.read()
-        angle = ( math.atan2(cartesian['x'],cartesian['y']) /math.pi)*180.0 + self.declination
+        angle = ( math.atan2(cartesian['x'],-cartesian['y']) /math.pi)*180.0 + self.declination
         angle = self._convertAngleToPositive(angle)
         magnitude = math.sqrt(cartesian['x']*cartesian['x'] + cartesian['y']*cartesian['y'] + cartesian['z']*cartesian['z'])
         return {'polar':angle, 'Gauss':magnitude*100, 'uT':magnitude}
@@ -234,5 +245,6 @@ class PiicoDev_QMC6310(object):
             self.z_offset = float(f.readline())
             sleep_ms(5)
         except:
-            print("No calibration file found. Run 'calibrate()' for best results.  Visit https://piico.dev/p15 for more info.")
+            if not self.suppress_warnings:
+                print("No calibration file found. Run 'calibrate()' for best results.  Visit https://piico.dev/p15 for more info.")
             sleep_ms(1000)

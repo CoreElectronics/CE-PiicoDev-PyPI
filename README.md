@@ -10,6 +10,7 @@ sudo pip3 install piicodev
 
 
 ## Changes
+	- v1.2.2 - QMC6310: Change default sign to match silk screen
 	- v1.2.1 - Add support for PiicoDev RFID Module
 	- v1.2.0 - Bad release, use v1.2.1
 	- v1.1.3 - Add support for QMC6310
