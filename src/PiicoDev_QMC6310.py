@@ -220,7 +220,7 @@ class PiicoDev_QMC6310(object):
             j = round(10*i/range);
             print( '\015[' + int(j)*'*' + int(10-j)*' ' + ']', end='') # print a progress bar
             if enable_logging:
-                log = log + (str(cartesian['x']) + ',' + str(cartesian['y']) + ',' + str(cartesian['z']) + '\n')
+                log = log + (str(d['x']) + ',' + str(d['y']) + ',' + str(d['z']) + '\n')
         self.setOutputDataRate(self.odr) # set the output data rate back to the user selected rate
         self.x_offset = (x_max + x_min) / 2
         self.y_offset = (y_max + y_min) / 2

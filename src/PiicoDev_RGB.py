@@ -29,7 +29,7 @@ class PiicoDev_RGB(object):
         self.i2c.writeto_mem(self.addr, _regLedVals, buffer)
 
     def setBrightness(self,x):
-        self.bright= x if 0 <= x <= 255 else 255
+        self.bright= round(x) if 0 <= x <= 255 else 255
         self.i2c.writeto_mem(self.addr, _regBright, bytes([self.bright]))
         sleep_ms(1)
 

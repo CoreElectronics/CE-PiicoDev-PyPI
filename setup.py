@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='piicodev',
-    version='1.2.2',
+    version='1.3.0',
     description='Drivers for the PiicoDev ecosystem of sensors and modules',
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -32,6 +32,7 @@ setup(
         "PiicoDev_QMC6310",
         "PiicoDev_RFID",
         "PiicoDev_RFID_Expansion",
+        "PiicoDev_RV3028",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

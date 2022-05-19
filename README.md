@@ -10,6 +10,10 @@ sudo pip3 install piicodev
 
 
 ## Changes
+	- v1.3.0
+		- Add support for PiicoDev Real Time Clock RV-3028
+		- Bugfix QMC6310: logging function
+		- Bugfix RGB module: ensure brightness is an integer
 	- v1.2.2 - QMC6310: Change default sign to match silk screen
 	- v1.2.1 - Add support for PiicoDev RFID Module
 	- v1.2.0 - Bad release, use v1.2.1
