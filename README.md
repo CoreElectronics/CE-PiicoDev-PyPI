@@ -10,6 +10,9 @@ sudo pip3 install piicodev
 
 
 ## Changes
+	- v1.3.1
+		- VL53L1X: Rename change_id() to change_addr()
+		- SSD1306: Add ASW argument to initialisation function
 	- v1.3.0
 		- Add support for PiicoDev Real Time Clock RV-3028
 		- Bugfix QMC6310: logging function
