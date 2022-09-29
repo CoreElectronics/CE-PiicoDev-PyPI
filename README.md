@@ -10,6 +10,7 @@ sudo pip3 install piicodev
 
 
 ## Changes
+	- v1.5.1 - Change device ID for Slide Potentiometer
 	- v1.5.0 - Add support for PiicoDev Potentiometers
 	- v1.4.0 - Add support for 3-Axis Accelerometer LIS3DH
 	- v1.3.1

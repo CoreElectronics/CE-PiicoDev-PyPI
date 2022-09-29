@@ -7,7 +7,8 @@ from PiicoDev_Unified import *
 compat_str = '\nUnified PiicoDev library out of date.  Get the latest module: https://piico.dev/unified \n'
 
 _BASE_ADDRESS = 0x35
-_DEVICE_ID    = 379
+_DEVICE_ID_POT   = 379
+_DEVICE_ID_SLIDE = 411
 
 _REG_STATUS      = 0x01
 _REG_FIRM_MAJ    = 0x02
@@ -36,14 +37,12 @@ class PiicoDev_Potentiometer(object):
         self._address = address
         self.minimum = minimum
         self.maximum = maximum
-        self.last_command_known = False
-        self.last_command_success = False
         if type(id) is list and not all(v == 0 for v in id): # preference using the ID argument. ignore id if all elements zero
             assert max(id) <= 1 and min(id) >= 0 and len(id) == 4, "id must be a list of 1/0, length=4"
             self._address=8+id[0]+2*id[1]+4*id[2]+8*id[3] # select address from pool
         else: self._address = address # accept an integer
         try:
-            if self.whoami != _DEVICE_ID:
+            if self.whoami != _DEVICE_ID_POT and self.whoami != _DEVICE_ID_SLIDE:
                 print("* Incorrect device found at address {}".format(address))   
         except:
             print("* Couldn't find a device - check switches and wiring")   
