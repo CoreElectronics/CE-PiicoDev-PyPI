@@ -1,6 +1,7 @@
 # A simple class to read data from the Core Electronics PiicoDev Potentiometer
-# Peter Johnston at Core Electronics
+# Peter Johnston and Michael Ruppe at Core Electronics
 # 2022 APR 06 - Initial release
+# 2022 OCT 12 - Stable release
 
 from PiicoDev_Unified import *
 
