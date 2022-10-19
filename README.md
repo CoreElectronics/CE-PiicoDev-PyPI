@@ -10,6 +10,9 @@ sudo pip3 install piicodev
 
 
 ## Changes
+
+	- v1.5.4 - Fix device ID address for PiicoDev potentiometers
+	- v1.5.3 - Force warning for unconfigured i2c on Raspberry Pi SBC for Potentiometer
 	- v1.5.2 - Add warning for unconfigured i2c on Raspberry Pi SBC
 	- v1.5.1 - Change device ID for Slide Potentiometer
 	- v1.5.0 - Add support for PiicoDev Potentiometers

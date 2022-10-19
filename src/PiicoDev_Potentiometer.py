@@ -11,13 +11,12 @@ _BASE_ADDRESS = 0x35
 _DEVICE_ID_POT   = 379
 _DEVICE_ID_SLIDE = 411
 
-_REG_STATUS      = 0x01
+_REG_WHOAMI      = 0x01
 _REG_FIRM_MAJ    = 0x02
 _REG_FIRM_MIN    = 0x03
 _REG_I2C_ADDRESS = 0x04
 _REG_POT         = 0x05
 _REG_LED         = 0x07
-_REG_WHOAMI      = 0x11
 
 def _read_bit(x, n):
     return x & 1 << n != 0
@@ -26,7 +25,7 @@ def _set_bit(x, n):
     return x | (1 << n)
 
 class PiicoDev_Potentiometer(object):
-    def __init__(self, bus=None, freq=None, sda=None, scl=None, address=_BASE_ADDRESS, id=None, minimum=0.0, maximum=100.0):
+    def __init__(self, bus=None, freq=None, sda=None, scl=None, address=_BASE_ADDRESS, id=None, minimum=0.0, maximum=100.0, suppress_warnings=False):
         try:
             if compat_ind >= 1:
                 pass
@@ -34,7 +33,7 @@ class PiicoDev_Potentiometer(object):
                 print(compat_str)
         except:
             print(compat_str)
-        self.i2c = create_unified_i2c(bus=bus, freq=freq, sda=sda, scl=scl)
+        self.i2c = create_unified_i2c(bus=bus, freq=freq, sda=sda, scl=scl, suppress_warnings=suppress_warnings)
         self._address = address
         self.minimum = minimum
         self.maximum = maximum
