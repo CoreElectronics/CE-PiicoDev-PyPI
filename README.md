@@ -11,6 +11,7 @@ sudo pip3 install piicodev
 
 ## Changes
 
+	- v1.7.1 - Improve RFID robustness (allow incomplete text reads)
 	- v1.7.0 - Add support for PiicoDev Button (PiicoDev_Switch.py)
 	- v1.6.1 - Add support for Air-Quality Sensor ENS160
 	- v1.6.0 - Bad release, use v1.6.1
