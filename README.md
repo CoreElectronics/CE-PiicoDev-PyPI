@@ -11,6 +11,7 @@ sudo pip3 install piicodev
 
 ## Changes
 
+	- v1.9.0 - Add support for PiicoDev Transceiver
 	- v1.8.0 - Add support for PiicoDev Servo Driver (PCA9685)
 	- v1.7.1 - Improve RFID robustness (allow incomplete text reads)
 	- v1.7.0 - Add support for PiicoDev Button (PiicoDev_Switch.py)
