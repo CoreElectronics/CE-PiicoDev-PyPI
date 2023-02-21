@@ -91,14 +91,11 @@ class PiicoDev_Servo_Driver(PCA9685):
 class PiicoDev_Servo:
     def __init__(self, controller, channel, freq=50, min_us=600, max_us=2400, degrees=180, midpoint_us=None, range_us=None):
         self.period = 1_000_000/freq # microseconds
-        print('period us',self.period)
         if midpoint_us is not None and range_us is not None: # option to define the servo timing with a midpoint and a range
             min_us = midpoint_us - range_us/2
             max_us = midpoint_us + range_us/2
         self.min_duty = self._us2duty(min_us) 
         self.max_duty = self._us2duty(max_us)
-        print('min duty',self.min_duty)
-        print('max duty',self.max_duty)
         self._degrees = degrees
         self.freq = freq
         self.controller = controller

@@ -11,6 +11,10 @@ sudo pip3 install piicodev
 
 ## Changes
 
+	- v1.10.0
+		- Add support for PiicoDev Ultrasonic Rangefinder
+		- Remove debug messages from PiicoDev_Servo.py
+		- Add ESP32 warnings in PiicoDev_Unified.py
 	- v1.9.0 - Add support for PiicoDev Transceiver
 	- v1.8.0 - Add support for PiicoDev Servo Driver (PCA9685)
 	- v1.7.1 - Improve RFID robustness (allow incomplete text reads)
