@@ -69,7 +69,7 @@ class PiicoDev_RFID(object):
         self.i2c = create_unified_i2c(bus=bus, freq=freq, sda=sda, scl=scl)
         
         if type(asw) is list: # determine address from ASW switch positions (if provided)
-            assert max(asw) <= 1 and min(asw) >= 0 and len(asw) is 2, "asw must be a list of 1/0, length=2"
+            assert max(asw) <= 1 and min(asw) >= 0 and len(asw) == 2, "asw must be a list of 1/0, length=2"
             self.address=_I2C_ADDRESS+asw[0]+2*asw[1]
         else:
             self.address = address # fall back on using address argument
