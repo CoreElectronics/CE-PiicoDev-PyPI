@@ -79,7 +79,7 @@ class PiicoDev_LIS3DH(object):
             else: print(compat_str)
         except: print(compat_str)
         
-        if asw not in [0,1]: self.address = _I2C_ADDRESS # default address used if asw not provided OR invalid
+        if asw not in [0,1]: self.address = address # default address used if asw not provided OR invalid
         else: self.address = [_I2C_ADDRESS, _I2C_ADDRESS-1][asw]
         self.i2c = create_unified_i2c(bus=bus, freq=freq, sda=sda, scl=scl)
         

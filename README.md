@@ -11,6 +11,7 @@ sudo pip3 install piicodev
 
 ## Changes
 
+    - v1.11.0 - Add support for PiicoDev Magnetometer MMC5603
 	- v1.10.0
 		- Add support for PiicoDev Ultrasonic Rangefinder
 		- Remove debug messages from PiicoDev_Servo.py

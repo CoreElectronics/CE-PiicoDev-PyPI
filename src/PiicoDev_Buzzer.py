@@ -9,6 +9,7 @@ _regI2cAddr=0x04
 _regTone=0x05
 _regVolume=0x06
 _regLED=0x07
+_regSelfTest = 0x09
 
 class PiicoDev_Buzzer(object):        
     def tone(self, freq, dur=0):
@@ -22,10 +23,12 @@ class PiicoDev_Buzzer(object):
         r=self.tone(0); return r
         
     def volume(self, vol):
-        _v = int(vol); assert _v >=0 and _v <=2,"volume must be 0, 1 or 2"
-        v = vol.to_bytes(1,'big')
+        if self.whoami[0] != 1:
+            print("Warning: Volume not implemented on this hardware revision")
+            return
+        assert vol in [0,1,2],"volume must be 0, 1 or 2"
         try:
-            self.i2c.writeto_mem(self.addr, _regVolume, v)
+            self.i2c.writeto_mem(self.addr, _regVolume, vol.to_bytes(1,'big'))
             sleep_ms(5); return 0
         except: print(i2c_err_str.format(self.addr)); return 1
 
@@ -45,8 +48,18 @@ class PiicoDev_Buzzer(object):
         try:
             v[1]=self.i2c.readfrom_mem(self.addr, _regFirmMaj, 1)
             v[0]=self.i2c.readfrom_mem(self.addr, _regFirmMin, 1)
-            return (v[1],v[0])
+            return (int.from_bytes(v[1],'big'), int.from_bytes(v[0],'big'))
         except: return(0,0)
+    
+    @property
+    def whoami(self):
+        return self.readFirmware()
+    
+    @property
+    def self_test(self):
+        """Returns the result of the self-test"""
+        result = self.i2c.readfrom_mem(self.addr, _regSelfTest, 1)
+        return int.from_bytes(result,'big')
 
     def readStatus(self):
         sts=self.i2c.readfrom_mem(self.addr, _regStatus,1)
@@ -59,7 +72,7 @@ class PiicoDev_Buzzer(object):
     def pwrLED(self, x):
         try: self.i2c.writeto_mem(self.addr, _regLED, bytes([x])); return 0
         except: print(i2c_err_str.format(self.addr)); return 1
-        
+           
     def __init__(self, bus=None, freq=None, sda=None, scl=None, addr=_baseAddr, id=None, volume=2):
         self.i2c = create_unified_i2c(bus=bus, freq=freq, sda=sda, scl=scl)
         a=addr
@@ -72,7 +85,8 @@ class PiicoDev_Buzzer(object):
         except Exception as e:
             print(i2c_err_str.format(self.addr))
             raise e
-        self.volume(volume)
+        if self.whoami[0] < 2: # volume deprecated in v20 design
+            self.volume(volume)
         # TODO: Check device ID - seems to timeout on Raspberry Pi (clock stretching not implemented)
 #         try:
 #             if self.readID() != _DevID:

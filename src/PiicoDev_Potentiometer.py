@@ -17,6 +17,7 @@ _REG_FIRM_MIN    = 0x03
 _REG_I2C_ADDRESS = 0x04
 _REG_POT         = 0x05
 _REG_LED         = 0x07
+_REG_SELF_TEST   = 0x09
 
 def _read_bit(x, n):
     return x & 1 << n != 0
@@ -135,6 +136,11 @@ class PiicoDev_Potentiometer(object):
         v[1]=self._read_int(_REG_FIRM_MAJ)
         v[0]=self._read_int(_REG_FIRM_MIN)
         return (v[1],v[0])
+    
+    @property
+    def self_test(self):
+        """Returns the result of the self-test"""
+        return self._read_int(_REG_SELF_TEST)
     
     def setI2Caddr(self, newAddr):
         x=int(newAddr)
